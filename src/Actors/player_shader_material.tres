@@ -1,0 +1,20 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[sub_resource type="Shader" id=2]
+code = "shader_type canvas_item;
+
+uniform bool greenify = false;
+
+void fragment() {
+	vec4 texture_color = texture(TEXTURE, UV);
+	COLOR = texture_color;
+	if(greenify) {
+		vec3 green = vec3(0.5,0.87,0.8);
+		vec3 green_texture = mix(texture_color.rgb, green, 0.6);
+		COLOR = vec4(green_texture.rgb, texture_color.a)
+	}
+}"
+
+[resource]
+shader = SubResource( 2 )
+shader_param/greenify = false
